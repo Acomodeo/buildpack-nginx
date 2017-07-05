@@ -19,6 +19,11 @@ CUR_DIR=`cd $(dirname $0); cd ..; pwd`
 
 mkdir -p $BUILD_DIR $CACHE_DIR
 
+if [[ "$CLEAR_CACHE" = "true" ]]; then
+  rm -rf $CACHE_DIR
+  mkdir $CACHE_DIR
+fi
+
 if [[ ! -e "$BUILD_DIR/www" ]]; then
   echo "-----> copy static files to www"
   rm -rf $CACHE_DIR/www
