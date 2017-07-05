@@ -20,6 +20,7 @@ CUR_DIR=`cd $(dirname $0); cd ..; pwd`
 mkdir -p $BUILD_DIR $CACHE_DIR
 
 if [[ "$CLEAR_CACHE" = "true" ]]; then
+  echo "-----> Clearing cache"
   rm -rf $CACHE_DIR
   mkdir $CACHE_DIR
 fi
