@@ -15,6 +15,7 @@ ZLIB_TARBALL="zlib-${ZLIB_VERSION}.tar.gz"
 # parse and derive params
 BUILD_DIR=$1
 CACHE_DIR=$2
+ENV_DIR=$3
 CUR_DIR=`cd $(dirname $0); cd ..; pwd`
 
 mkdir -p $BUILD_DIR $CACHE_DIR
@@ -59,6 +60,12 @@ if [[ ! -d "${ZLIB_TARBALL%.tar.gz}" ]]; then
   tar xzf "${ZLIB_TARBALL}" && rm -rf "${ZLIB_TARBALL}"
 fi
 
+if [[ -s "${ENV_DIR}/WITH_BASIC_AUTH" && "$(cat ${ENV_DIR}/WITH_BASIC_AUTH)" == "true" ]]; then
+  basic_auth_option=""
+else
+  basic_auth_option="--without-http_auth_basic_module"
+fi
+
 cd "nginx-${NGINX_VERSION}"
 if [[ ! -f "${CACHE_DIR}/bin/nginx" ]]; then
   echo "-----> compile static nginx"
@@ -82,7 +89,7 @@ if [[ ! -f "${CACHE_DIR}/bin/nginx" ]]; then
     --without-http_ssi_module \
     --without-http_userid_module \
     --without-http_access_module \
-    --without-http_auth_basic_module \
+    ${basic_auth_option} \
     --without-http_autoindex_module \
     --without-http_geo_module \
     --without-http_map_module \
