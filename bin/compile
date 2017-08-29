@@ -40,6 +40,10 @@ if [[ ! -e "$BUILD_DIR/www" ]]; then
   rm -rf $CACHE_DIR/www
 fi
 
+if [[ -s "${ENV_DIR}/BUILDPACK_CLEAR_CACHE" && "$(cat ${ENV_DIR}/BUILDPACK_CLEAR_CACHE)" == "true" ]]; then
+    rm -rf $CACHE_DIR/*
+fi
+
 cd $CACHE_DIR
 
 if [[ ! -d "${NGINX_TARBALL%.tar.gz}" ]]; then
