@@ -10,7 +10,7 @@ NGINX_TARBALL="nginx-${NGINX_VERSION}.tar.gz"
 PCRE_VERSION="8.40"
 PCRE_TARBALL="pcre-${PCRE_VERSION}.tar.gz"
 ZLIB_VERSION="1.2.11"
-ZLIB_TARBALL="${ZLIB_VERSION}.tar.gz"
+ZLIB_TARBALL="v${ZLIB_VERSION}.tar.gz"
 
 # parse and derive params
 BUILD_DIR=$1
